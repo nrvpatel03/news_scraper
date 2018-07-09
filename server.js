@@ -23,7 +23,7 @@ app.set("view engine", "handlebars");
 
 //for now just keep everything here, if later, we can put in separate
 //folders. Right now just get it to work properly.
-//think of a database name.
+//remember to do the change when we upload to heroku.
 mongoose.connect("mongodb://localhost/newsScraper");
 
 //Routes
@@ -52,23 +52,11 @@ app.get("/scrape", function(req, res){
     });
 });
 
-//get route for getting all articles from database
-app.get("/articles", function(req, res){
-    db.Article.find({})
-    .then(function(dbArticle){
-        //change this later, gets them in an array!
-        res.json(dbArticle);
-    })
-    .catch(function(err){
-        res.json(err);
-    });
-});
+
 
 //get a specific article and add note
 app.get("/articles/:id", function(req, res){
-    //remember what taylor said about req.params.id? validation?
     db.Article.findOne({_id: req.params.id})
-    //associated note
     .populate("note")
     .then(function(dbArticle){
         res.json(dbArticle);
@@ -95,7 +83,7 @@ app.post("/articles/:id", function(req, res){
 
 //delete route for articles Notes
 app.delete("/articles/:id", function(req,res){
-    //this deletes the whole article, just want to delete the note.
+    
     db.Note.remove()
     .then(function(dbNote){
         return db.Article.findOneAndUpdate({_id: req.params.id}, {note: dbNote._id})
@@ -103,6 +91,25 @@ app.delete("/articles/:id", function(req,res){
     .then(function(dbArticle){
         res.json(dbArticle);
         console.log("deleted Note");
+    })
+    .catch(function(err){
+        res.json(err);
+    });
+});
+
+
+//get route for getting all articles from database, will be default.
+app.get("*", function(req, res){
+    db.Article.find({})
+    .then(function(dbArticle){
+        //change this later, gets them in an array!
+        if(dbArticle.length === 0){
+            res.send("NO data, scrape first!");
+        }else{
+            res.json(dbArticle);
+        }
+        
+        //res.render("index", object) Look at homework 12!
     })
     .catch(function(err){
         res.json(err);
