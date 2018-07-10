@@ -49,8 +49,7 @@ app.get("/scrape", function(req, res){
                 res.send(err);
             });
         });
-        
-        res.send("Scrape Complete");
+        res.render("scraped");
     });
 });
 
@@ -61,26 +60,32 @@ app.get("/articles/:id", function(req, res){
     db.Article.findOne({_id: req.params.id})
     .populate("note")
     .then(function(dbArticle){
-        res.json(dbArticle);
+        var hbsObj = {
+            article: dbArticle
+        }
+        res.render("notemaker",hbsObj);
+        
     })
     .catch(function(err){
         res.json(err);
     });
+    
 });
 //get a specific note
-//Get route for specific note to load on view notes.
+
 //post/update route for articles Notes
 app.post("/articles/:id", function(req, res){
     db.Note.create(req.body)
     .then(function(dbNote){
-        return db.Article.findOneAndUpdate({_id: req.params.id}, {note: dbNote._id}, {new: true});
+        return db.Article.findOneAndUpdate({_id: req.params.id}, {note: dbNote._id}, {upsert: true});
     })
     .then(function(dbArticle){
-        res.json(dbArticle);
+        console.log(dbArticle);
     })
     .catch(function(err){
         res.json(err);
     });
+
 });
 
 
@@ -101,21 +106,16 @@ app.delete("/articles/:id", function(req,res){
 });
 
 
+
+
 //get route for getting all articles from database, will be default.
 app.get("*", function(req, res){
     db.Article.find({})
     .then(function(dbArticle){
-        
-        if(dbArticle.length === 0){
-            res.send("NO data, scrape first!");
-        }else{
-            var hbsObj = {
-                articles: dbArticle
-            };
-            res.render("index", hbsObj);
-        }
-        
-        //res.render("index", object) Look at homework 12!
+        var hbsObj = {
+            articles: dbArticle
+        };
+        res.render("index", hbsObj);
     })
     .catch(function(err){
         res.json(err);

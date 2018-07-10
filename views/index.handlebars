@@ -1,4 +1,8 @@
+
 <div class="container text-center">
+    <a href="/scrape">
+    <button id="scrape" class="btn-lg btn-primary">Scrape!</button>
+    </a>
     {{#each articles}}
     <div class="row">
         <div class="col-12">
@@ -12,12 +16,12 @@
     </div>
     <div class="row">
         <div class="col-6">
-            <button class="btn-lg btn-success">Create Note</button>
+            <button class="btn-lg btn-success createNote" _id={{_id}}>Create Note/Update Note</button>
         </div>
         <div class="col-6">
-            <button class="btn-lg btn-info">View Note</button>
+            <button class="btn-lg btn-danger deleteNote" _id={{_id}}>Delete Note</button>
         </div>
     </div>
-    
     {{/each}}
 </div>
+<script src="/assets/js/index.js"></script>
