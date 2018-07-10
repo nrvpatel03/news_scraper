@@ -32,6 +32,7 @@ body{
     width: 100%;
 }
 .homebtn{
+    margin-top: 10px;
     margin-bottom: 15px;
 }
 .scraped{
