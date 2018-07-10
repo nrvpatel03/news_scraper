@@ -9,5 +9,5 @@ $("#submitNote").click(function(event){
     $.post("/articles/" + id, post).done(function(data){
         console.log("posted");
     });
-    alert("Note has been submitted");
+    
 })
