@@ -8,6 +8,8 @@ $("#submitNote").click(function(event){
     var id = $("#key").text();
     $.post("/articles/" + id, post).done(function(data){
         console.log("posted");
+        
     });
+    alert("Note Created");
     
 })
