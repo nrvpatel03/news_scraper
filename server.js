@@ -107,6 +107,7 @@ app.delete("/articles/:id", function(req,res){
 
 
 
+
 //get route for getting all articles from database, will be default.
 app.get("*", function(req, res){
     db.Article.find({})
