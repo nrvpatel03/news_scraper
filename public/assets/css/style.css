@@ -1,0 +1,45 @@
+body{
+    background-image: url("https://zdnet2.cbsistatic.com/hub/i/2017/08/21/f2256d58-aba0-40fe-aac1-d740b6c910b9/2e1fed277e042cc3c7c04a88f8b400b6/bitcoinccpubdomain.jpg");
+    background-size: contain;
+}
+.eachArticle{
+    width: 100%;
+    background-color: rgb(255, 255, 255,.7);
+    margin-bottom: 50px;
+}
+.titleRow{
+    color: black;
+    padding: 10px;
+    margin: 10px;
+}
+
+.linkRow{
+    font-size: 25px;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+}
+.links{
+    text-decoration: none;
+    padding: 10px;
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+.buttonRow{
+    padding: 10px;
+}
+.buttons{
+    width: 100%;
+}
+.homebtn{
+    margin-bottom: 15px;
+}
+.scraped{
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+.formLabels{
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}

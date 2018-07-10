@@ -1,26 +1,28 @@
 
 <div class="container text-center">
     <a href="/scrape">
-    <button id="scrape" class="btn-lg btn-primary">Scrape!</button>
+    <button id="scrape" class="btn-lg btn-primary">Scrape from Cryptonews.com!</button>
     </a>
     {{#each articles}}
-    <div class="row">
+    <div class="eachArticle">
+    <div class="row titleRow">
         <div class="col-12">
-            <p class="h4">{{title}}</p>
+            <p class="h4 title">{{title}}</p>
         </div>
     </div>
-    <div class="row">
+    <div class="row linkRow">
         <div class="col-12">
-            <a href={{link}} target="_blank">{{link}}</a>
+            <a class="links" href={{link}} target="_blank">Read Full Article</a>
         </div>
     </div>
-    <div class="row">
+    <div class="buttonRow row">
         <div class="col-6">
-            <button class="btn-lg btn-success createNote" _id={{_id}}>Create Note/Update Note</button>
+            <button class="buttons btn-lg btn-success createNote" _id={{_id}}>Create Note/Update Note</button>
         </div>
         <div class="col-6">
-            <button class="btn-lg btn-danger deleteNote" _id={{_id}}>Delete Note</button>
+            <button class="buttons btn-lg btn-danger deleteNote" _id={{_id}}>Delete Note</button>
         </div>
+    </div>
     </div>
     {{/each}}
 </div>

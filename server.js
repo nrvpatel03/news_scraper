@@ -21,10 +21,9 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
-//for now just keep everything here, if later, we can put in separate
-//folders. Right now just get it to work properly.
-//remember to do the change when we upload to heroku.
-mongoose.connect("mongodb://localhost/newsScraper");
+var MONGODB_URI =  process.env.MONGODB_URL || "mongodb://localhost/newsScraper";
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 //Routes
 

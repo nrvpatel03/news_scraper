@@ -9,5 +9,6 @@ $(".deleteNote").click(function(){
         method: "DELETE",
     }).done(function(){
         console.log("deleted");
+        alert("Note has been Deleted!");
     })
 })
