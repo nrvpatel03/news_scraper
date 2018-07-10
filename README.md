@@ -8,5 +8,5 @@ Click the scrape button on top to scrape news articles from cryptonews.com. Then
 ### Links
 GitHub Repo: https://github.com/nrvpatel03/news_scraper
 
-Heroku: 
+Heroku: https://whispering-coast-79390.herokuapp.com/
 
