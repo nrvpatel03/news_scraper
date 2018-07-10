@@ -30,6 +30,7 @@ mongoose.connect("mongodb://localhost/newsScraper");
 
 //Get route for scraping
 app.get("/scrape", function(req, res){
+    //avoid dupicates.
     request("https://cryptonews.com/news/", function(error, response, html){
         var $ = cheerio.load(html);
         
@@ -38,13 +39,14 @@ app.get("/scrape", function(req, res){
 
             result.title = $(this).children('h4').children().text();
             result.link = $(this).children('h4').children().attr("href");
-
-            db.Article.create(result)
+            
+            db.Article.update({title: result.title}, {$set: {title: result.title, link: result.link}}, {upsert: true})
             .then(function(dbArticle){
                 console.log(dbArticle);
             })
             .catch(function(err){
-                return res.json(err);
+                // res.end();
+                res.send(err);
             });
         });
         
@@ -65,7 +67,8 @@ app.get("/articles/:id", function(req, res){
         res.json(err);
     });
 });
-
+//get a specific note
+//Get route for specific note to load on view notes.
 //post/update route for articles Notes
 app.post("/articles/:id", function(req, res){
     db.Note.create(req.body)
