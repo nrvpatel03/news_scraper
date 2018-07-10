@@ -38,14 +38,14 @@ app.get("/scrape", function(req, res){
             var result = {};
 
             result.title = $(this).children('h4').children().text();
-            result.link = $(this).children('h4').children().attr("href");
+            result.link = "https://cryptonews.com" + $(this).children('h4').children().attr("href");
             
             db.Article.update({title: result.title}, {$set: {title: result.title, link: result.link}}, {upsert: true})
             .then(function(dbArticle){
                 console.log(dbArticle);
             })
             .catch(function(err){
-                // res.end();
+                
                 res.send(err);
             });
         });
@@ -105,11 +105,14 @@ app.delete("/articles/:id", function(req,res){
 app.get("*", function(req, res){
     db.Article.find({})
     .then(function(dbArticle){
-        //change this later, gets them in an array!
+        
         if(dbArticle.length === 0){
             res.send("NO data, scrape first!");
         }else{
-            res.json(dbArticle);
+            var hbsObj = {
+                articles: dbArticle
+            };
+            res.render("index", hbsObj);
         }
         
         //res.render("index", object) Look at homework 12!
